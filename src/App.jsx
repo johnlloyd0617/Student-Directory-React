@@ -1,26 +1,22 @@
 
 import { useState } from 'react';
-import './App.css';
+import HeaderContainer from './Component/HeaderContainer';
 
 function App() {
 
-    // Store student information
     const [students, setStudents] = useState([]);
-
-    // Store input values
     const [studentName, setStudentName] = useState('');
     const [studentProgram, setStudentProgram] = useState('');
 
-    // Add student
+    // ADD STUDENT
     function handleSubmit(event) {
-
         event.preventDefault();
 
         const name = studentName.trim();
         const program = studentProgram.trim();
 
         if (name === '' || program === '') {
-            alert('Please enter the student name and program.');
+            alert('Please enter student information.');
             return;
         }
 
@@ -32,35 +28,24 @@ function App() {
 
         setStudents([...students, newStudent]);
 
-        // Clear input fields
         setStudentName('');
         setStudentProgram('');
     }
 
-    // Remove student
+    // REMOVE STUDENT
     function removeStudent(id) {
-
         setStudents(
             students.filter(student => student.id !== id)
         );
-
     }
 
     return (
-
         <>
+            <HeaderContainer />
 
-            {/* Header */}
-            <header>
-                <h1>Student Directory</h1>
-                <p>Add and manage student information easily.</p>
-            </header>
-
-
-            {/* Main Content */}
             <main className="container">
 
-                {/* Student Form */}
+                {/* STUDENT FORM */}
                 <section className="form-section">
 
                     <h2>Add Student</h2>
@@ -68,7 +53,6 @@ function App() {
                     <form onSubmit={handleSubmit}>
 
                         <div className="input-group">
-
                             <label htmlFor="studentName">
                                 Student Name
                             </label>
@@ -81,13 +65,11 @@ function App() {
                                 onChange={(e) =>
                                     setStudentName(e.target.value)
                                 }
+                                required
                             />
-
                         </div>
 
-
                         <div className="input-group">
-
                             <label htmlFor="studentProgram">
                                 Program
                             </label>
@@ -100,10 +82,9 @@ function App() {
                                 onChange={(e) =>
                                     setStudentProgram(e.target.value)
                                 }
+                                required
                             />
-
                         </div>
-
 
                         <button type="submit" className="add-btn">
                             Add Student
@@ -113,8 +94,7 @@ function App() {
 
                 </section>
 
-
-                {/* Student Display Area */}
+                {/* STUDENT LIST */}
                 <section className="students-section">
 
                     <div className="section-header">
@@ -123,13 +103,13 @@ function App() {
 
                         <span id="studentCount">
                             {students.length}{' '}
-                            {students.length === 1 ? 'Student' : 'Students'}
+                            {students.length === 1
+                                ? 'Student'
+                                : 'Students'}
                         </span>
 
                     </div>
 
-
-                    {/* Student Cards */}
                     <div className="student-grid">
 
                         {students.length === 0 ? (
@@ -142,7 +122,10 @@ function App() {
 
                             students.map(student => (
 
-                                <div className="student-card" key={student.id}>
+                                <div
+                                    className="student-card"
+                                    key={student.id}
+                                >
 
                                     <div className="student-icon">
                                         {student.name.charAt(0).toUpperCase()}
@@ -151,13 +134,16 @@ function App() {
                                     <h3>{student.name}</h3>
 
                                     <p>
-                                        <strong>Program:</strong><br />
+                                        <strong>Program:</strong>
+                                        <br />
                                         {student.program}
                                     </p>
 
                                     <button
                                         className="remove-btn"
-                                        onClick={() => removeStudent(student.id)}
+                                        onClick={() =>
+                                            removeStudent(student.id)
+                                        }
                                     >
                                         Remove Student
                                     </button>
@@ -173,9 +159,7 @@ function App() {
                 </section>
 
             </main>
-
         </>
-
     );
 }
 
