@@ -2,6 +2,8 @@
 function FormContainer({
     studentName,
     setStudentName,
+    SrCode,
+    setSrCode,
     studentProgram,
     setStudentProgram,
     handleSubmit
@@ -25,6 +27,23 @@ function FormContainer({
                         placeholder="Enter student name"
                         value={studentName}
                         onChange={(e) => setStudentName(e.target.value)}
+                        required
+                    />
+
+                </div>
+
+                <div className="input-group">
+
+                    <label htmlFor="Sr Code">
+                        Sr Code
+                    </label>
+
+                    <input
+                        type="text"
+                        id="Sr Code"
+                        placeholder="Enter Sr Code"
+                        value={SrCode}
+                        onChange={(e) => setSrCode(e.target.value)}
                         required
                     />
 
